@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="web-reminder">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<script src="/Reminder/js/angular.min.js"></script>
+
+<script type="text/javascript">
+    angular.module('web-reminder',[])
+            .controller('RemindController', function($scope) {
+
+            });
+</script>
+    <div ng-controller="RemindController">
+        <input ng-model="name" type="text" placeholder="Karanjeet">
+        <h1>Hello {{name}}</h1>
+    </div>
+</body>
+</html>
