@@ -6,17 +6,13 @@
 
 </head>
 <body>
-<script src="/Reminder/js/angular.min.js"></script>
+<script src="/Reminder/external/js/angular.min.js"></script>
+<script src="/Reminder/external/js/jquery-2.2.2.min.js"></script>
+<script src="/Reminder/external/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    angular.module('web-reminder',[])
-            .controller('RemindController', function($scope) {
+<link rel="stylesheet" type="text/css" href="/Reminder/external/css/bootstrap.min.css">
+<script src="/Reminder/reminderController.js"></script>
 
-            });
-</script>
-    <div ng-controller="RemindController">
-        <input ng-model="name" type="text" placeholder="Karanjeet">
-        <h1>Hello {{name}}</h1>
-    </div>
+<div ng-include="'/Reminder/reminder.html'"></div>
 </body>
 </html>
