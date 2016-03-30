@@ -1,8 +1,9 @@
 package com.jasraj.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CalendarDto {
+public class CalendarDto implements Serializable {
 
     private LocalDate date;
     private int dayOfMonth;
