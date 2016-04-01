@@ -1,7 +1,7 @@
 package com.jasraj.controller;
 
 import com.jasraj.com.jasraj.service.CalendarService;
-import com.jasraj.dto.CalendarDto;
+import com.jasraj.dto.MonthDto;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,13 +17,11 @@ import java.util.Map;
 public class ReminderEndPoint {
 
     @GET
-    @Path("/{param}")
+    @Path("/calendar/{plusMinus}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMsg(@PathParam("param") String msg) {
-        Map<Integer, List<CalendarDto>> calendarByRow = CalendarService.populateMonth(LocalDate.now(), 0);
-        return Response.ok(calendarByRow).build();
-       // return new CalendarDto().setDate(null).setDayOfMonth(1);
-
+    public Response getMsg(@PathParam("plusMinus") int plusMinus) {
+        MonthDto month = CalendarService.populateMonth(LocalDate.now(), 0);
+        return Response.ok(month).build();
     }
 
 }

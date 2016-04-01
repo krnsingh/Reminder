@@ -1,7 +1,5 @@
 <div ng-controller="reminderController">
 
-    <h1> {{info}}</h1>
-
     <div class="container-fluid">
         <table class="table table-bordered table-cell-hover" width="100%">
             <tr>
@@ -13,8 +11,8 @@
                 <th>SATURDAY</th>
                 <th>SUNDAY</th>
             </tr>
-                <tr ng-repeat="(row, weekDates) in calendar">
-                    <td ng-repeat="date in weekDates">{{date.dayOfMonth === 0 ? '' : date.dayOfMonth}}</td>
+                <tr ng-repeat="week in calendar.weeks">
+                    <td ng-repeat="date in week.dates">{{date.dayOfMonth}}</td>
                 </tr>
 
         </table>
