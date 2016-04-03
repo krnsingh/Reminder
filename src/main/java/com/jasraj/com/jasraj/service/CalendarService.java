@@ -67,7 +67,7 @@ public class CalendarService {
 
     private static void addEmpty(List<LocalDate> monthDates, int numOfDays) {
         for (int i = 0; i < numOfDays; i++) {
-            monthDates.add(LocalDate.MIN);
+            monthDates.add(null);
         }
     }
 

@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <table class="table table-bordered table-cell-hover" width="100%">
             <tr>
-                <th>MONDAY</th>
+                <th ng-click="myFunc()">MONDAY</th>
                 <th>TUESDAY</th>
                 <th>WEDNESDAY</th>
                 <th>THURSDAY</th>
@@ -12,7 +12,7 @@
                 <th>SUNDAY</th>
             </tr>
                 <tr ng-repeat="week in calendar.weeks">
-                    <td ng-repeat="date in week.dates">{{date.dayOfMonth}}</td>
+                    <td ng-repeat="date in week.dates">{{date.localDate.dayOfMonth}}</td>
                 </tr>
 
         </table>
