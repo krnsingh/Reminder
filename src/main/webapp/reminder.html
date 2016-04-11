@@ -1,9 +1,12 @@
 <div ng-controller="reminderController">
-
     <div class="container-fluid">
+        <div>
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+        </div>
         <table class="table table-bordered table-cell-hover" width="100%">
             <tr>
-                <th ng-click="myFunc()">MONDAY</th>
+                <th>MONDAY</th>
                 <th>TUESDAY</th>
                 <th>WEDNESDAY</th>
                 <th>THURSDAY</th>
@@ -12,7 +15,7 @@
                 <th>SUNDAY</th>
             </tr>
                 <tr ng-repeat="week in calendar.weeks">
-                    <td ng-repeat="date in week.dates">{{date.localDate.dayOfMonth}}</td>
+                    <td ng-repeat="date in week.dates" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
                 </tr>
 
         </table>

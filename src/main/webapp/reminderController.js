@@ -7,15 +7,18 @@ angular.module('web-reminder', ['ngDialog'])
                 console.log(response.data);
             });
 
-        $scope.myFunc = function() {
-            ngDialog.open({ template: 'popup.html', className: 'ngdialog-theme-default' });
+
+        $scope.displayPopup = function(date) {
+            console.log(date);
+            ngDialog.open({
+                template: 'popup.html',
+                className: 'ngdialog-theme-default',
+                controller: 'popupController'
+            });
         };
 
     })
-    .directive('popupDirective', function () {
-        return {
-            restrict: 'EAC',
-            replace: true,
-            template: '<a href="http://google.com">Click me to go to Google</a>'
-        };
-    });
+    .controller('popupController', function ($scope, $http) {
+        $scope.popup = "opoptext";
+
+    })
