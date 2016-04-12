@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div>{{calendar.firstDate.month + calendar.firstDate.year}}</div>
         <div>
-            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)">
+            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)" ng-disabled="isCurrentMonth()">
                 <span class="glyphicon glyphicon-chevron-left"></span> Prev
             </button>
             <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(1)">

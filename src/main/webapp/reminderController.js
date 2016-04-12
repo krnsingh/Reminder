@@ -5,6 +5,10 @@ angular.module('web-reminder', ['ngDialog'])
             $scope.getCalender(0);
         };
 
+        $scope.isCurrentMonth = function() {
+            return $scope.refdate.getMonth() === new Date().getMonth();
+        };
+
         $scope.getCalender = function (plusMinusCurrentMonth) {
             if (plusMinusCurrentMonth === 0) {
                 var currentDate = new Date();
