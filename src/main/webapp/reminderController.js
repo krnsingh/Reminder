@@ -16,7 +16,7 @@ angular.module('web-reminder', ['ngDialog'])
                 currentDate = $scope.refdate;
                 currentDate.setMonth(currentDate.getMonth() + plusMinusCurrentMonth);
                 $scope.refdate = currentDate;
-                month = currentDate.getMonth();
+                month = currentDate.getMonth() + 1;
                 year = currentDate.getFullYear();
                 console.log("else condition " + $scope.refdate);
             }
