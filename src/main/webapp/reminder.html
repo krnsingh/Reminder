@@ -1,8 +1,13 @@
-<div ng-controller="reminderController">
+<div ng-controller="reminderController" data-ng-init="init()">
     <div class="container-fluid">
+        <div>{{calendar.firstDate.month + calendar.firstDate.year}}</div>
         <div>
-            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)">
+                <span class="glyphicon glyphicon-chevron-left"></span> Prev
+            </button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(1)">
+                <span class="glyphicon glyphicon-chevron-right"></span> Next
+            </button>
         </div>
         <table class="table table-bordered table-cell-hover" width="100%">
             <tr>
@@ -14,9 +19,9 @@
                 <th>SATURDAY</th>
                 <th>SUNDAY</th>
             </tr>
-                <tr ng-repeat="week in calendar.weeks">
-                    <td ng-repeat="date in week.dates" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
-                </tr>
+            <tr ng-repeat="week in calendar.weeks">
+                <td ng-repeat="date in week.dates" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
+            </tr>
 
         </table>
     </div>

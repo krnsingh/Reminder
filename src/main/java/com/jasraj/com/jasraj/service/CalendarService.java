@@ -13,15 +13,14 @@ import java.util.Map;
 
 public class CalendarService {
 
-    public static MonthDto populateMonth(LocalDate referenceDate, int plusMinusMonths) {
-        MonthDto monthDto = new MonthDto();
+    public static MonthDto populateMonth(LocalDate referenceDate) {
         List<LocalDate> monthDates = new ArrayList<LocalDate>(31);
-        LocalDate date = referenceDate.plusMonths(plusMinusMonths);
-        LocalDate start = date.withDayOfMonth(1);
-        LocalDate end = date.withDayOfMonth(date.lengthOfMonth());
+        LocalDate start = referenceDate.withDayOfMonth(1);
+        LocalDate end = referenceDate.withDayOfMonth(referenceDate.lengthOfMonth());
+
         // week starts with monday
         if (start.getDayOfWeek().equals(DayOfWeek.MONDAY)) {
-            for (LocalDate loopDate = start; loopDate.isBefore(end); loopDate.plusDays(1)) {
+            for (LocalDate loopDate = start; loopDate.isBefore(end); loopDate = loopDate.plusDays(1)) {
                 monthDates.add(loopDate);
             }
         } else {
@@ -49,7 +48,7 @@ public class CalendarService {
                 monthDates.add(loopDate);
             }
         }
-        return splitListMap(monthDates);
+        return splitListMap(monthDates).setFirstDate(start);
     }
 
     private static MonthDto splitListMap(List<LocalDate> monthDates) {

@@ -8,7 +8,6 @@ import java.util.List;
 public class MonthDto implements Serializable {
 
     private List<WeekDto> weeks = new ArrayList<WeekDto>(5);
-    private String monthName;
     private LocalDate firstDate;
 
     public List<WeekDto> getWeeks() {
@@ -19,19 +18,13 @@ public class MonthDto implements Serializable {
         this.weeks.add(week);
     }
 
-    public String getMonthName() {
-        return monthName;
-    }
-
-    public void setMonthName(String monthName) {
-        this.monthName = monthName;
-    }
 
     public LocalDate getFirstDate() {
         return firstDate;
     }
 
-    public void setFirstDate(LocalDate firstDate) {
+    public MonthDto setFirstDate(LocalDate firstDate) {
         this.firstDate = firstDate;
+        return this;
     }
 }

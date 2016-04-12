@@ -17,11 +17,13 @@ import java.util.Map;
 public class ReminderEndPoint {
 
     @GET
-    @Path("/calendar/{plusMinus}")
+    @Path("/calendar/{month}/{year}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMsg(@PathParam("plusMinus") int plusMinus) {
-        MonthDto month = CalendarService.populateMonth(LocalDate.now(), 0);
-        return Response.ok(month).build();
+    public Response getMsg(@PathParam("month") int month, @PathParam("year") int year) {
+        LocalDate refDate = LocalDate.of(year, month, 1);
+        MonthDto monthDto = CalendarService.populateMonth(refDate);
+
+        return Response.ok(monthDto).build();
     }
 
 }
