@@ -1,4 +1,4 @@
-package com.jasraj.com.jasraj.service;
+package com.jasraj.service;
 
 import com.jasraj.dto.MonthDto;
 import com.jasraj.dto.WeekDto;

@@ -1,10 +1,10 @@
 <div>
     <form>
         <div class="form-group">
-            <label for="time">Time : </label>
-            <select id="time" name="timeSelect" ng-model="timeOptions">
-                <option ng-repeat="time in timeOptions" value="{{time}}">{{time}}</option>
-            </select>
+            <label for="hrs">Time : </label>
+            <select id="hrs" ng-model="selectedHr" ng-options="hr for hr in timeHrs"></select>
+            <select id="mins" ng-model="selectedMin" ng-options="min for min in timeMins"></select>
+
         </div>
         <div class="form-group">
             <label for="email">Email : </label>
@@ -19,8 +19,5 @@
                Submit
             </button>
         </div>
-
-
-
     </form>
 </div>
