@@ -8,11 +8,11 @@
         </div>
         <div class="form-group">
             <label for="email">Email : </label>
-            <input id="email" type="text"/>
+            <input id="email" type="email" ng-model="email"/>
         </div>
         <div class="form-group">
             <label for="reminder">Reminder : </label>
-            <input id="reminder" type="text"/>
+            <input id="reminder" ng-model="reminder" type="text"/>
         </div>
         <div>
             <button type="button" class="btn btn-default btn-sm" ng-click="submitReminder()">
