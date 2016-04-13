@@ -20,7 +20,7 @@
                 <th>SUNDAY</th>
             </tr>
             <tr ng-repeat="week in calendar.weeks">
-                <td ng-repeat="date in week.dates" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
+                <td ng-repeat="date in week.dates" ng-disabled="{{true}}" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
             </tr>
 
         </table>

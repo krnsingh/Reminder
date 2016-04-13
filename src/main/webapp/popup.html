@@ -1,3 +1,26 @@
 <div>
-    {{popup}}
+    <form>
+        <div class="form-group">
+            <label for="time">Time : </label>
+            <select id="time" name="timeSelect" ng-model="timeOptions">
+                <option ng-repeat="time in timeOptions" value="{{time}}">{{time}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email">Email : </label>
+            <input id="email" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="reminder">Reminder : </label>
+            <input id="reminder" type="text"/>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-sm" ng-click="submitReminder()">
+               Submit
+            </button>
+        </div>
+
+
+
+    </form>
 </div>

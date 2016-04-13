@@ -9,6 +9,11 @@ angular.module('web-reminder', ['ngDialog'])
             return $scope.refdate.getMonth() === new Date().getMonth();
         };
 
+        $scope.isPreviousDate = function(date) {
+            console.log(date);
+            return false;
+        };
+
         $scope.getCalender = function (plusMinusCurrentMonth) {
             if (plusMinusCurrentMonth === 0) {
                 var currentDate = new Date();
@@ -44,7 +49,10 @@ angular.module('web-reminder', ['ngDialog'])
         };
 
     })
-    .controller('popupController', function ($scope, $http) {
-        $scope.popup = "opoptext";
+    .controller('popupController', function ($scope, $http) { // popup ctrl
+        $scope.timeOptions = ["saffdsgsfdg","dfsdfsd", "dsfsdfsdfsf"];
+        $scope.submitReminder = function() {
+            console.log("Reminder Button Clicked");
+        }
 
     })
