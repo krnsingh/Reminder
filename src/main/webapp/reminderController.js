@@ -40,7 +40,7 @@ angular.module('web-reminder', ['ngDialog'])
 
 
         $scope.displayPopup = function (date) {
-            console.log(date);
+            console.log("popupDate", date);
             ngDialog.open({
                 template: 'popup.html',
                 className: 'ngdialog-theme-default',
@@ -53,6 +53,7 @@ angular.module('web-reminder', ['ngDialog'])
 
         $scope.timeHrs = ["00","01", "02","03","04","05","06","07","08","09","10","11","12"];
         $scope.timeMins = ["00","15", "30","45"];
+
         //$scope.selected = {
         //    email:"",
         //    reminder:""

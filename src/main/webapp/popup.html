@@ -1,8 +1,7 @@
 <div>
     <form>
         <div class="form-group">
-            <div> Selected Date: {{calendar.firstDate.month + calendar.firstDate.year}}</div>
-            <label for="hrs">Select: {{calendar.firstDate.month + calendar.firstDate.year}}</label>
+            <label for="hrs">Time: </label>
             <select id="hrs" ng-model="selectedHr" ng-options="hr for hr in timeHrs"></select>
             <select id="mins" ng-model="selectedMin" ng-options="min for min in timeMins"></select>
 
@@ -18,9 +17,6 @@
         <div>
             <button type="button" class="btn btn-default btn-sm" ng-click="submitReminder()">
                Submit
-            </button>
-            <button type="button" class="btn btn-default btn-sm" ng-click="submitReminder()">
-                Close
             </button>
         </div>
     </form>
