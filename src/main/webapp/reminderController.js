@@ -40,17 +40,18 @@ angular.module('web-reminder', ['ngDialog'])
 
 
         $scope.displayPopup = function (date) {
-            console.log("popupDate", date);
+            $scope.selectedDate = date.localDate;
             ngDialog.open({
                 template: 'popup.html',
                 className: 'ngdialog-theme-default',
-                controller: 'popupController'
+                controller: 'popupController',
+                scope: $scope
             });
         };
 
     })
     .controller('popupController', function ($scope, $http) { // popup ctrl
-
+        console.log("Selected Date", $scope.selectedDate);
         $scope.timeHrs = ["00","01", "02","03","04","05","06","07","08","09","10","11","12"];
         $scope.timeMins = ["00","15", "30","45"];
 
@@ -63,6 +64,26 @@ angular.module('web-reminder', ['ngDialog'])
             console.log("selectedMin - ", $scope.selectedMin);
             console.log("selectedEmail - ", $scope.email);
             console.log("selectedRem - ", $scope.reminder);
+            var alterUrl = "http://localhost:8080/Reminder/rest/reminder/create";
+            var alterData = {
+                "email":$scope.email,
+                "msg":$scope.reminder,
+                "month":$scope.selectedDate.monthValue,
+                "year":$scope.selectedDate.year,
+                "hh":$scope.selectedHr,
+                "mm":$scope.selectedMin
+            };
+
+
+            $http.post(alterUrl, alterData).then( function(response) {
+                console.log("Success" + response);
+            },
+            function(response) {
+                console.log("failed " + response );
+
+            });
+
+
         }
 
     })
