@@ -1,0 +1,12 @@
+<div>
+    <form>
+        <table class="table table-bordered table-cell-hover" width="100%">
+            <tr ng-repeat="alert in alerts">
+                <td ng-click="">
+                    {{alert.mm}} : {{alert.hh}} - {{alert.month}} / {{alert.year}} :: {{alert.msg}}
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>

@@ -43,8 +43,9 @@ angular.module('web-reminder', ['ngDialog'])
                 .then(function (response) {
                     $scope.calendar = response.data;
                     console.log(response.data);
-                })
+            })
         };
+
 
 
         $scope.displayPopup = function (date) {
@@ -57,6 +58,21 @@ angular.module('web-reminder', ['ngDialog'])
             });
         };
 
+        $scope.reminderCancelPopup = function () {
+            var url = "http://localhost:8080/Reminder/rest/reminder/alerts/" +  $scope.reminderEmail ;
+            console.log("URL",url);
+            $http.get(url)
+                .then(function (response) {
+                    $scope.alerts = response.data;
+                    console.log("Alerts from, backend - ", response.data);
+            })
+            ngDialog.open({
+                template: 'cancel.html',
+                className: 'ngdialog-theme-default',
+                controller: 'cancelReminderController',
+                scope: $scope
+            });
+        };
     })
     .controller('popupController', function ($scope, $http, ngDialog) { // popup ctrl
         console.log("Selected Date", $scope.selectedDate);
@@ -103,4 +119,10 @@ angular.module('web-reminder', ['ngDialog'])
         }
 
     })
+    .controller('cancelReminderController', function ($scope, $http, ngDialog) {
 
+        $scope.cancelReminder = function (alert) {
+            console.log("cancel called ", alert);
+        }
+
+    })

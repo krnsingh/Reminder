@@ -27,7 +27,7 @@
                     <div>{{calendar.firstDate.month + calendar.firstDate.year}}</div>
                     <div>Email - {{reminderEmail}}</div>
                 </div>
-                <div class="panel-body"
+                <div class="panel-body">
                 <div>
                     <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)"
                             ng-disabled="isCurrentMonth()">
@@ -49,7 +49,12 @@
                     </tr>
                     <tr ng-repeat="week in calendar.weeks">
                         <td ng-repeat="date in week.dates" ng-disabled="{{true}}" ng-click="displayPopup(date)">
-                            {{date.localDate.dayOfMonth}}
+                            <div ng-if="date.alertExists">
+                                <a href="" ng-click="reminderCancelPopup();$event.stopPropagation()"><b>{{date.localDate.dayOfMonth}}</b></a>
+                            </div>
+                            <div ng-if="!date.alertExists">
+                                {{date.localDate.dayOfMonth}}
+                            </div>
                         </td>
                     </tr>
 

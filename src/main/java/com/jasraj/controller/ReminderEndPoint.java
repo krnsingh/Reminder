@@ -9,6 +9,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/reminder")
 public class ReminderEndPoint {
@@ -21,6 +23,18 @@ public class ReminderEndPoint {
         MonthDto monthDto = CalendarService.populateMonth(refDate);
 
         return Response.ok(monthDto).build();
+    }
+
+    @GET
+    @Path("/alerts/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response generateCalender(@PathParam("email") String email) {
+       // LocalDate refDate = LocalDate.of(year, month, 1);
+       // MonthDto monthDto = CalendarService.populateMonth(refDate);
+        List<AlertDto> alertDto = new ArrayList<>();
+        alertDto.add(new AlertDto().setEmail(email).setHh(14).setMm(44).setMonth(4).setYear(2016).setMsg("ulalla"));
+        alertDto.add(new AlertDto().setEmail(email).setHh(15).setMm(45).setMonth(5).setYear(2016).setMsg("asdasdasdqsda"));
+        return Response.ok(alertDto).build();
     }
 
     @POST
