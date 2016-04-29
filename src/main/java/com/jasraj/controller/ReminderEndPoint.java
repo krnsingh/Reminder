@@ -1,8 +1,9 @@
 package com.jasraj.controller;
 
 import com.jasraj.dto.AlertDto;
-import com.jasraj.service.CalendarService;
+import com.jasraj.dto.AlertResponseDto;
 import com.jasraj.dto.MonthDto;
+import com.jasraj.service.CalendarService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,7 +28,11 @@ public class ReminderEndPoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createAlter(final AlertDto alertDto) {
-
-        return Response.ok().build();
+        AlertResponseDto alertResponseDto = new AlertResponseDto();
+        String msg = "Alert submitted successful for " + alertDto.getEmail() + "\n" +
+                "Alert text - " + alertDto.getMsg() + "\n" +
+                "Date time - " + alertDto.getHh() + alertDto.getMm() + " " + alertDto.getMonth() + " " + alertDto.getYear();
+        alertResponseDto.setResponseMsg(msg);
+        return Response.ok(alertResponseDto).build();
     }
 }

@@ -1,14 +1,13 @@
 <div>
     <form>
         <div class="form-group">
+           <b> {{selectedDate.dayOfMonth}} - {{selectedDate.month}} - {{selectedDate.year}} </b>
+        </div>
+        <div class="form-group">
             <label for="hrs">Time: </label>
             <select id="hrs" ng-model="selectedHr" ng-options="hr for hr in timeHrs"></select>
             <select id="mins" ng-model="selectedMin" ng-options="min for min in timeMins"></select>
 
-        </div>
-        <div class="form-group">
-            <label for="email">Email : </label>
-            <input id="email" type="email" ng-model="email"/>
         </div>
         <div class="form-group">
             <label for="reminder">Reminder : </label>
@@ -16,7 +15,7 @@
         </div>
         <div>
             <button type="button" class="btn btn-default btn-sm" ng-click="submitReminder()">
-               Submit
+                Submit
             </button>
         </div>
     </form>
