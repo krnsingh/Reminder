@@ -1,15 +1,23 @@
 angular.module('web-reminder', ['ngDialog'])
     .controller('reminderController', function ($scope, $http, ngDialog) {
 
+        $scope.isReminderEmailSet = false;
+
+        $scope.submitReminderEmail = function (reminderEmail) {
+            $scope.isReminderEmailSet = true;
+            $scope.reminderEmail = reminderEmail;
+            console.log($scope.reminderEmail);
+        };
+
         $scope.init = function () {
             $scope.getCalender(0);
         };
 
-        $scope.isCurrentMonth = function() {
+        $scope.isCurrentMonth = function () {
             return $scope.refdate.getMonth() === new Date().getMonth();
         };
 
-        $scope.isPreviousDate = function(date) {
+        $scope.isPreviousDate = function (date) {
             console.log(date);
             return false;
         };
@@ -35,34 +43,86 @@ angular.module('web-reminder', ['ngDialog'])
                 .then(function (response) {
                     $scope.calendar = response.data;
                     console.log(response.data);
-                })
+            })
         };
+
 
 
         $scope.displayPopup = function (date) {
-            console.log("popupDate", date);
+            $scope.selectedDate = date.localDate;
             ngDialog.open({
                 template: 'popup.html',
                 className: 'ngdialog-theme-default',
-                controller: 'popupController'
+                controller: 'popupController',
+                scope: $scope
             });
         };
 
+        $scope.reminderCancelPopup = function () {
+            var url = "http://localhost:8080/Reminder/rest/reminder/alerts/" +  $scope.reminderEmail ;
+            console.log("URL",url);
+            $http.get(url)
+                .then(function (response) {
+                    $scope.alerts = response.data;
+                    console.log("Alerts from, backend - ", response.data);
+            })
+            ngDialog.open({
+                template: 'cancel.html',
+                className: 'ngdialog-theme-default',
+                controller: 'cancelReminderController',
+                scope: $scope
+            });
+        };
     })
-    .controller('popupController', function ($scope, $http) { // popup ctrl
-
-        $scope.timeHrs = ["00","01", "02","03","04","05","06","07","08","09","10","11","12"];
-        $scope.timeMins = ["00","15", "30","45"];
+    .controller('popupController', function ($scope, $http, ngDialog) { // popup ctrl
+        console.log("Selected Date", $scope.selectedDate);
+        $scope.timeHrs = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+        $scope.timeMins = ["00", "15", "30", "45"];
 
         //$scope.selected = {
         //    email:"",
         //    reminder:""
         //};
-        $scope.submitReminder = function() {
+
+
+
+        $scope.submitReminder = function () {
             console.log("selectedHr - ", $scope.selectedHr);
             console.log("selectedMin - ", $scope.selectedMin);
-            console.log("selectedEmail - ", $scope.email);
+            console.log("selectedEmail - ", $scope.reminderEmail);
             console.log("selectedRem - ", $scope.reminder);
+            var alterUrl = "http://localhost:8080/Reminder/rest/reminder/create";
+            var alterData = {
+                "email": $scope.reminderEmail,
+                "msg": $scope.reminder,
+                "month": $scope.selectedDate.monthValue,
+                "year": $scope.selectedDate.year,
+                "hh": $scope.selectedHr,
+                "mm": $scope.selectedMin
+            };
+
+
+            $http.post(alterUrl, alterData).then(function (response) {
+                    console.log("Success", response.data.responseMsg);
+                    $scope.closeThisDialog();
+                    ngDialog.open({
+                        template: '<div><b>' + response.data.responseMsg + '</b></div>',
+                        plain: true,
+                    });
+                },
+                function (response) {
+                    console.log("failed " + response);
+
+                });
+
+
+        }
+
+    })
+    .controller('cancelReminderController', function ($scope, $http, ngDialog) {
+
+        $scope.cancelReminder = function (alert) {
+            console.log("cancel called ", alert);
         }
 
     })

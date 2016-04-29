@@ -1,28 +1,66 @@
 <div ng-controller="reminderController" data-ng-init="init()">
-    <div class="container-fluid">
-        <div>{{calendar.firstDate.month + calendar.firstDate.year}}</div>
-        <div>
-            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)" ng-disabled="isCurrentMonth()">
-                <span class="glyphicon glyphicon-chevron-left"></span> Prev
-            </button>
-            <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(1)">
-                <span class="glyphicon glyphicon-chevron-right"></span> Next
-            </button>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-info" ng-if="!isReminderEmailSet">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Submit Email Id For Alerts</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="reminderEmail">Email: </label>
+                        <input name="reminderEmail" id="reminderEmail" type="email" ng-model="reminderEmail"/>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-default btn-sm"
+                                ng-click="submitReminderEmail(reminderEmail)">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <table class="table table-bordered table-cell-hover" width="100%">
-            <tr>
-                <th>MONDAY</th>
-                <th>TUESDAY</th>
-                <th>WEDNESDAY</th>
-                <th>THURSDAY</th>
-                <th>FRIDAY</th>
-                <th>SATURDAY</th>
-                <th>SUNDAY</th>
-            </tr>
-            <tr ng-repeat="week in calendar.weeks">
-                <td ng-repeat="date in week.dates" ng-disabled="{{true}}" ng-click="displayPopup(date)">{{date.localDate.dayOfMonth}}</td>
-            </tr>
-
-        </table>
     </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="panel panel-info" ng-if="isReminderEmailSet">
+                <div class="panel-heading">
+                    <div>{{calendar.firstDate.month + calendar.firstDate.year}}</div>
+                    <div>Email - {{reminderEmail}}</div>
+                </div>
+                <div class="panel-body">
+                <div>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(-1)"
+                            ng-disabled="isCurrentMonth()">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Prev
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="getCalender(1)">
+                        <span class="glyphicon glyphicon-chevron-right"></span> Next
+                    </button>
+                </div>
+                <table class="table table-bordered table-cell-hover" width="100%">
+                    <tr>
+                        <th>MONDAY</th>
+                        <th>TUESDAY</th>
+                        <th>WEDNESDAY</th>
+                        <th>THURSDAY</th>
+                        <th>FRIDAY</th>
+                        <th>SATURDAY</th>
+                        <th>SUNDAY</th>
+                    </tr>
+                    <tr ng-repeat="week in calendar.weeks">
+                        <td ng-repeat="date in week.dates" ng-disabled="{{true}}" ng-click="displayPopup(date)">
+                            <div ng-if="date.alertExists">
+                                <a href="" ng-click="reminderCancelPopup();$event.stopPropagation()"><b>{{date.localDate.dayOfMonth}}</b></a>
+                            </div>
+                            <div ng-if="!date.alertExists">
+                                {{date.localDate.dayOfMonth}}
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
