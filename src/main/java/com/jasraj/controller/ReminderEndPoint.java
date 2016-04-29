@@ -3,7 +3,10 @@ package com.jasraj.controller;
 import com.jasraj.dto.AlertDto;
 import com.jasraj.dto.AlertResponseDto;
 import com.jasraj.dto.MonthDto;
+import com.jasraj.entity.User;
+import com.jasraj.hibernate.HibernateUtil;
 import com.jasraj.service.CalendarService;
+import org.hibernate.SessionFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -42,6 +45,8 @@ public class ReminderEndPoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createAlter(final AlertDto alertDto) {
+
+
         AlertResponseDto alertResponseDto = new AlertResponseDto();
         String msg = "Alert submitted successful for " + alertDto.getEmail() + "\n" +
                 "Alert text - " + alertDto.getMsg() + "\n" +
