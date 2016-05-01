@@ -1,5 +1,6 @@
 package com.jasraj.hibernate;
 
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -23,5 +24,10 @@ public class HibernateUtil {
         if (sessionFactoryObject == null)
             sessionFactoryObject = buildSessionFactory();
         return sessionFactoryObject;
+    }
+
+    public static  void shutdown()
+    {
+        sessionFactoryObject.close();
     }
 }
