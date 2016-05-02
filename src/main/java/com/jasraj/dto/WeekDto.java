@@ -1,10 +1,13 @@
 package com.jasraj.dto;
 
+import com.jasraj.entity.Alert;
+import com.jasraj.service.DateService;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WeekDto implements Serializable {
     private List<DayDto> dates = new ArrayList<DayDto>(7);
@@ -14,8 +17,15 @@ public class WeekDto implements Serializable {
         return dates;
     }
 
-    public WeekDto setDates(List<LocalDate> dates) {
-        this.dates = dates.stream().map(date -> new DayDto().setLocalDate(date)).collect(Collectors.toList());
+    public WeekDto setDates(List<LocalDateTime> dates, List<Alert> alerts) {
+
+
+        dates.stream().forEach(date -> {
+            long count = alerts.stream().filter(alert -> DateService.compare(
+                    alert.getLocalDate(),
+                    date)).count();
+            this.dates.add(new DayDto().setLocalDate(date).setAlertExists(count > 0));
+        });
         return this;
     }
 

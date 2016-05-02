@@ -1,4 +1,4 @@
-<div ng-controller="reminderController" data-ng-init="init()">
+<div ng-controller="reminderController">
     <div class="row">
         <div class="col-lg-4">
             <div class="panel panel-info" ng-if="!isReminderEmailSet">
@@ -50,7 +50,7 @@
                     <tr ng-repeat="week in calendar.weeks">
                         <td ng-repeat="date in week.dates" ng-disabled="{{true}}" ng-click="displayPopup(date)">
                             <div ng-if="date.alertExists">
-                                <a href="" ng-click="reminderCancelPopup();$event.stopPropagation()"><b>{{date.localDate.dayOfMonth}}</b></a>
+                                <a href="" ng-click="reminderCancelPopup(date.localDate.dayOfMonth);$event.stopPropagation()"><b>{{date.localDate.dayOfMonth}}</b></a>
                             </div>
                             <div ng-if="!date.alertExists">
                                 {{date.localDate.dayOfMonth}}

@@ -1,14 +1,14 @@
 package com.jasraj.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonthDto implements Serializable {
 
     private List<WeekDto> weeks = new ArrayList<WeekDto>(5);
-    private LocalDate firstDate;
+    private LocalDateTime firstDate;
 
     public List<WeekDto> getWeeks() {
         return weeks;
@@ -19,11 +19,11 @@ public class MonthDto implements Serializable {
     }
 
 
-    public LocalDate getFirstDate() {
+    public LocalDateTime getFirstDate() {
         return firstDate;
     }
 
-    public MonthDto setFirstDate(LocalDate firstDate) {
+    public MonthDto setFirstDate(LocalDateTime firstDate) {
         this.firstDate = firstDate;
         return this;
     }

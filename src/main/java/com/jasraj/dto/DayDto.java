@@ -2,25 +2,28 @@ package com.jasraj.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DayDto implements Serializable {
 
-    private LocalDate localDate;
-    private boolean alertExists = true;
+    private LocalDateTime localDate;
+    private boolean alertExists = false;
 
     public boolean isAlertExists() {
         return alertExists;
     }
 
-    public void setAlertExists(boolean alertExists) {
+    public DayDto setAlertExists(boolean alertExists) {
         this.alertExists = alertExists;
+        return this;
     }
 
-    public LocalDate getLocalDate() {
+    public LocalDateTime getLocalDate() {
         return localDate;
     }
 
-    public DayDto setLocalDate(LocalDate localDate) {
+    public DayDto setLocalDate(LocalDateTime localDate) {
         this.localDate = localDate;
         return this;
     }

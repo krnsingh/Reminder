@@ -4,12 +4,32 @@ import java.io.Serializable;
 
 public class AlertDto implements Serializable {
 
+    private int id;
     private String email;
     private String msg;
     private int month;
     private int year;
     private int hh;
     private int mm;
+    private int day;
+
+    public int getDay() {
+        return day;
+    }
+
+    public AlertDto setDay(int day) {
+        this.day = day;
+        return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public AlertDto setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public String getEmail() {
         return email;
