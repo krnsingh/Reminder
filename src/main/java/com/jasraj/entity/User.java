@@ -1,34 +1,21 @@
 package com.jasraj.entity;
 
+/**
+ * Created by Jaskirat on 29-04-2016.
+ */
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Created by Jaskirat on 29-04-2016.
+ */
 @Entity
-@Table(uniqueConstraints =
-@UniqueConstraint(columnNames = {"emailId"}))
+@Table(name="username",
+        uniqueConstraints={@UniqueConstraint(columnNames = {"id"})})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String emailId;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Alert> alerts;
-
-    public List<Alert> getAlerts() {
-        return alerts;
-    }
-
-    public void setAlerts(List<Alert> alerts) {
-        this.alerts = alerts;
-    }
-
-    public void addAlert(Alert alert) {
-        if (alerts == null || alerts.size() == 0) {
-            alerts = new ArrayList<>();
-        }
-        alerts.add(alert);
-    }
+    private String name;
 
     public int getId() {
         return id;
@@ -38,11 +25,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getName() {
+        return name;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setName(String name) {
+        this.name = name;
     }
+
 }
