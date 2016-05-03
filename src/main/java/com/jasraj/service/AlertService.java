@@ -2,6 +2,7 @@ package com.jasraj.service;
 
 import com.jasraj.config.HibernateConfig;
 import com.jasraj.dto.AlertDto;
+import com.jasraj.dto.EmailDto;
 import com.jasraj.entity.Alert;
 import com.jasraj.entity.User;
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.hibernate.SessionFactory;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +47,23 @@ public class AlertService {
         return alerts;
     }
 
+    public List<EmailDto> getAlertsForEmail() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now().plusMinutes(15);
+        Query query = session.createQuery("from Alert where localDate between :start and :end ")
+                .setParameter("start", start)
+                .setParameter("end", end);
+        List<Alert> alerts = (List<Alert>) query.list();
+        if(alerts == null) {
+            return new ArrayList<>();
+        }
+        List<EmailDto> emailDtos = alerts.stream().map(alert -> new EmailDto().setEmail(alert.getUser().getEmailId()).setMessage(alert.getMessage()))
+                .collect(Collectors.toList());
+        session.getTransaction().commit();
+        return emailDtos;
+    }
     public boolean deleteAlert(int id) {
         boolean retVal = false;
         Session session = sessionFactory.getCurrentSession();

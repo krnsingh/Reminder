@@ -5,6 +5,7 @@ import com.jasraj.dto.AlertResponseDto;
 import com.jasraj.dto.MonthDto;
 import com.jasraj.entity.Alert;
 import com.jasraj.entity.User;
+import com.jasraj.job.Scheduler;
 import com.jasraj.service.AlertService;
 import com.jasraj.service.CalendarService;
 
@@ -19,10 +20,13 @@ public class ReminderEndPoint {
 
     AlertService alertService = new AlertService();
 
+
+
     @GET
     @Path("/calendar/{email}/{month}/{year}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response generateCalender(@PathParam("email") String email, @PathParam("month") int month, @PathParam("year") int year) {
+        Scheduler.start();
         LocalDateTime refDate = LocalDateTime.of(year, month, 1, 0, 0);
         MonthDto monthDto = CalendarService.populateMonth(refDate, alertService.getAlerts(email));
         return Response.ok(monthDto).build();
