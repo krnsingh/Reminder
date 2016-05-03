@@ -3,16 +3,11 @@ package com.jasraj.service;
 import com.jasraj.dto.MonthDto;
 import com.jasraj.dto.WeekDto;
 import com.jasraj.entity.Alert;
-import com.jasraj.entity.User;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CalendarService {
 
